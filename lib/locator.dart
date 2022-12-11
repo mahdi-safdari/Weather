@@ -8,6 +8,7 @@ import 'features/feature_weather/data/data_source/remote/api_provider.dart';
 GetIt locator = GetIt.instance;
 
 setup() {
+  //! API provider
   locator.registerSingleton<ApiProvider>(ApiProvider());
 
   //! Repositories
