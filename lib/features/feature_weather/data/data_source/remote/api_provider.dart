@@ -14,6 +14,7 @@ class ApiProvider {
         'q': cityName,
         'appid': apiKey,
         'units': 'metric',
+        //! 'lang': 'fa'  persian
       },
     );
     return response;

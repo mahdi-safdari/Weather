@@ -1,3 +1,4 @@
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entities/current_city_entity.dart';
 import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/cw_status.dart';
 import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,13 @@ class _MainWrapperState extends State<MainWrapper> {
             );
           }
           if (state.cwStatus is CwCompleted) {
-            return const Center(
-              child: Text('COMPLETED'),
+            //! Cast
+            final CwCompleted cwCompleted = state.cwStatus as CwCompleted;
+            final CurrentCityEntity currentCityEntity =
+                cwCompleted.currentCityEntity;
+
+            return Center(
+              child: Text(currentCityEntity.name.toString()),
             );
           }
           if (state.cwStatus is CwError) {

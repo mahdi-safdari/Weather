@@ -3,6 +3,6 @@
 //! ------------------------------------------
 
 class Constants {
-  static const baseUrl = 'https://openweathermap.org';
-  static const apiKeys = '43f850dd450123d89f4f98578bef258a';
+  static const baseUrl = 'https://api.openweathermap.org';
+  static const apiKeys = '4b2e1f18f1004cbd6ef8a9d05f204a42';
 }
