@@ -14,7 +14,6 @@ class _MainWrapperState extends State<MainWrapper> {
   @override
   void initState() {
     super.initState();
-
     BlocProvider.of<HomeBloc>(context).add(const LoadCwEvent('Tehran'));
   }
 
