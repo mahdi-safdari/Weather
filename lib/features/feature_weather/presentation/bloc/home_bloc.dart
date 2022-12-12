@@ -1,18 +1,21 @@
+import '../../domain/use_cases/get_current_weather_usecase.dart';
+import '../../../../core/resources/data_state.dart';
 import 'package:bloc/bloc.dart';
-import 'package:clean_block_floor_lint_dio/core/resources/data_state.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_current_weather_usecase.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/cw_status.dart';
-import 'package:equatable/equatable.dart';
-
+import 'cw_status.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
+//! HomeEvent is imported
+//! HomeState is output
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetCurrentWeatherUseCase getCurrentWeatherUseCase;
 
+  //! super => Initial mode of the application
   HomeBloc(this.getCurrentWeatherUseCase)
       : super(HomeState(cwStatus: CwLoading())) {
-    on<LoadCwEvent>((event, emit) async {
+    //! this method on => Convert events to stream
+    //! Any time call LoadCwEvent event run the method on
+    on<LoadCwEvent>((LoadCwEvent event, Emitter<HomeState> emit) async {
       emit(state.copyWith(newCwStatus: CwLoading()));
       DataState dataState = await getCurrentWeatherUseCase(event.cityName);
 
