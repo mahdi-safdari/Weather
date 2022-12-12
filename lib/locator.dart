@@ -1,9 +1,9 @@
-import 'package:clean_block_floor_lint_dio/features/feature_weather/data/repository/weather_repositoryimpl.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/repository/weather_repository.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_current_weather_usecase.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'features/feature_weather/data/data_source/remote/api_provider.dart';
+import 'features/feature_weather/data/repository/weather_repositoryimpl.dart';
+import 'features/feature_weather/domain/repository/weather_repository.dart';
+import 'features/feature_weather/domain/use_cases/get_current_weather_usecase.dart';
+import 'features/feature_weather/presentation/bloc/home_bloc.dart';
 
 GetIt locator = GetIt.instance;
 //! Dependency injection with get_it
