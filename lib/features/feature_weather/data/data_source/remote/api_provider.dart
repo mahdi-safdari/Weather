@@ -1,5 +1,6 @@
 import 'package:clean_block_floor_lint_dio/core/utils/constants.dart';
 import 'package:dio/dio.dart';
+import '../../../../../core/params/forecast_param.dart';
 
 class ApiProvider {
   final Dio _dio = Dio();
@@ -15,6 +16,21 @@ class ApiProvider {
         'appid': apiKey,
         'units': 'metric',
         // 'lang': 'fa',
+      },
+    );
+    return response;
+  }
+
+//! Forcast API 7 Days
+  Future<dynamic> senRequest7DaysForcast(ForecastParams params) async {
+    var response = await _dio.get(
+      '$baseUrl/data/2.5/onecall',
+      queryParameters: {
+        'lat': params.lat,
+        'lon': params.lon,
+        'exclude': 'minutely,hourly',
+        'appid': apiKey,
+        'units': 'metric',
       },
     );
     return response;

@@ -1,3 +1,4 @@
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_forecast_weather_usecase.dart';
 import 'package:get_it/get_it.dart';
 import 'features/feature_weather/data/data_source/remote/api_provider.dart';
 import 'features/feature_weather/data/repository/weather_repositoryimpl.dart';
@@ -15,10 +16,14 @@ setup() {
   locator
       .registerSingleton<WeatherRepository>(WeatherRepositoryImpl(locator()));
 
-  //! use Case
+  //! current weather use case
   locator.registerSingleton<GetCurrentWeatherUseCase>(
       GetCurrentWeatherUseCase(locator()));
 
+  //! forecast weather use case
+  locator.registerSingleton<GetForecastWeatherUseCase>(
+      GetForecastWeatherUseCase(locator()));
+
   //! Bloc
-  locator.registerSingleton<HomeBloc>(HomeBloc(locator()));
+  locator.registerSingleton<HomeBloc>(HomeBloc(locator(), locator()));
 }

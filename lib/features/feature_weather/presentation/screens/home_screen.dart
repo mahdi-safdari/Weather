@@ -33,11 +33,14 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           BlocBuilder<HomeBloc, HomeState>(
             builder: (BuildContext context, HomeState state) {
+              //! Loading
               if (state.cwStatus is CwLoading) {
                 return const Expanded(
                   child: DotLoadingWidget(),
                 );
               }
+
+              //! completed data
               if (state.cwStatus is CwCompleted) {
                 //! Cast
                 final CwCompleted cwCompleted = state.cwStatus as CwCompleted;
@@ -52,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SizedBox(
                           width: width,
                           height: 400,
+
+                          //! page view indicator
                           child: PageView.builder(
                             physics: const AlwaysScrollableScrollPhysics(),
                             allowImplicitScrolling: true,
@@ -60,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (BuildContext context, int position) {
                               if (position == 0) {
                                 return Column(
-                                  children: [
+                                  children: <Widget>[
+                                    //! city name
                                     Padding(
                                       padding: const EdgeInsets.only(top: 50),
                                       child: Text(
@@ -71,6 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
+
+                                    //! city description
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
                                       child: Text(
@@ -82,6 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
+
+                                    //! weather icon
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
                                       child: AppBackground.setIconForMain(
@@ -89,6 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             .weather![0].description!,
                                       ),
                                     ),
+
+                                    //! weather temp
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
                                       child: Text(
@@ -99,6 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
+
+                                    //! max & min Temp
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
                                       child: Row(
@@ -170,6 +184,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
+
+                      //! smooth page indicator
                       Center(
                         child: SmoothPageIndicator(
                           controller: pageController,
@@ -187,6 +203,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               curve: Curves.easeInOutQuint,
                             );
                           },
+                        ),
+                      ),
+
+                      //! Divider
+                      const Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: Divider(
+                          color: Colors.white,
+                        ),
+                      ),
+                      //! forecast weather 7 days
+                      const Padding(
+                        padding: EdgeInsets.all(8),
+                      ),
+
+                      //! Divider
+                      const Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: Divider(
+                          color: Colors.white,
                         ),
                       ),
                     ],
