@@ -1,4 +1,8 @@
+import 'package:clean_block_floor_lint_dio/core/params/forecast_param.dart';
 import 'package:clean_block_floor_lint_dio/core/widgets/app_background.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/data/models/forecast_days_model.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entities/forecase_days_entity.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/fw_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -6,6 +10,7 @@ import '../../../../core/widgets/dot_loading_widget.dart';
 import '../../domain/entities/current_city_entity.dart';
 import '../bloc/cw_status.dart';
 import '../bloc/home_bloc.dart';
+import '../widgets/day_weather_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,6 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           BlocBuilder<HomeBloc, HomeState>(
+            buildWhen: (HomeState previous, HomeState current) {
+              //! Rebuild just when current weather status changed
+              if (previous.cwStatus == current.cwStatus) {
+                return false;
+              }
+              return true;
+            },
             builder: (BuildContext context, HomeState state) {
               //! Loading
               if (state.cwStatus is CwLoading) {
@@ -46,6 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 final CwCompleted cwCompleted = state.cwStatus as CwCompleted;
                 final CurrentCityEntity currentCityEntity =
                     cwCompleted.currentCityEntity;
+                //! Create params for api call
+                final ForecastParams forecastParams = ForecastParams(
+                  currentCityEntity.coord!.lat!,
+                  currentCityEntity.coord!.lon!,
+                );
+                //! Start load forecast weather event
+                BlocProvider.of<HomeBloc>(context)
+                    .add(LoadFwEvent(forecastParams));
 
                 return Expanded(
                   child: ListView(
@@ -214,8 +234,58 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       //! forecast weather 7 days
-                      const Padding(
-                        padding: EdgeInsets.all(8),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: SizedBox(
+                          width: width,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Center(
+                              child: BlocBuilder<HomeBloc, HomeState>(
+                                builder:
+                                    (BuildContext context, HomeState state) {
+                                  //! forecast weather loading state
+                                  if (state.fwStatus is FwLoading) {
+                                    return const DotLoadingWidget();
+                                  }
+                                  //! forecast weather Completed state
+                                  if (state.fwStatus is FwCompleted) {
+                                    //! Castring
+                                    final FwCompleted fwCompleted =
+                                        state.fwStatus as FwCompleted;
+                                    final ForecastDaysEntity
+                                        forecastDaysEntity =
+                                        fwCompleted.forecastDaysEntity;
+                                    final List<Daily> mainDaily =
+                                        forecastDaysEntity.daily!;
+
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: 8,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return DaysWeatherView(
+                                          daily: mainDaily[index],
+                                        );
+                                      },
+                                    );
+                                  }
+                                  //! Forecast weather Error state
+                                  if (state.fwStatus is FwError) {
+                                    final FwError fwError =
+                                        state.fwStatus as FwError;
+                                    return Center(
+                                      child: Text(fwError.messeage),
+                                    );
+                                  }
+                                  //! Forecast weather Default state
+                                  return Container();
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
 
                       //! Divider
