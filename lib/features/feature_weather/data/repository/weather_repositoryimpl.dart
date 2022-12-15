@@ -1,14 +1,15 @@
-import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entities/forecase_days_entity.dart';
-
 import '../../../../core/params/forecast_param.dart';
 import '../../../../core/resources/data_state.dart';
 import '../../domain/entities/current_city_entity.dart';
+import '../../domain/entities/forecase_days_entity.dart';
+import '../../domain/entities/suggest_city_entity.dart';
 import '../../domain/repository/weather_repository.dart';
 import '../data_source/remote/api_provider.dart';
 import '../models/current_city_model.dart';
 import 'package:dio/dio.dart';
 
 import '../models/forecast_days_model.dart';
+import '../models/suggest_city_model.dart';
 
 //! Repository pattern
 //! Body of the Repository class is here
@@ -53,5 +54,13 @@ class WeatherRepositoryImpl extends WeatherRepository {
       return DataFailed('Please check your connection ...'); //! Error Handling
 
     }
+  }
+
+  @override
+  Future<List<Data>> fetchSuggestData(cityName) async {
+    Response response = await apiProvider.sendRequestCitySuggestion(cityName);
+    SuggestCityEntity suggestCityEntity =
+        SuggestCityModel.fromJson(response.data);
+    return suggestCityEntity.data!;
   }
 }

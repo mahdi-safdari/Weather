@@ -2,6 +2,7 @@ import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entit
 
 import '../../../../core/params/forecast_param.dart';
 import '../../../../core/resources/data_state.dart';
+import '../../data/models/suggest_city_model.dart';
 import '../entities/current_city_entity.dart';
 
 abstract class WeatherRepository {
@@ -9,4 +10,6 @@ abstract class WeatherRepository {
 
   Future<DataState<ForecastDaysEntity>> fetchForecastWeatherData(
       ForecastParams params);
+
+  Future<List<Data>> fetchSuggestData(cityName);
 }
