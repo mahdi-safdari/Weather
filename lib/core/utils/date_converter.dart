@@ -16,6 +16,5 @@ class DateConverter {
     return formatter.format(DateTime.fromMillisecondsSinceEpoch(
         (dt * 1000) + timeZone * 1000,
         isUtc: true));
-    ;
   }
 }

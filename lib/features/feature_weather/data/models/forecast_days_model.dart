@@ -139,7 +139,7 @@ class Daily {
     int? moonset,
     double? moonPhase,
     Temp? temp,
-    Feels_like? feelsLike,
+    FeelsLike? feelsLike,
     int? pressure,
     int? humidity,
     double? dewPoint,
@@ -182,7 +182,7 @@ class Daily {
     _moonPhase = json['moon_phase'].toDouble();
     _temp = json['temp'] != null ? Temp.fromJson(json['temp']) : null;
     _feelsLike = json['feels_like'] != null
-        ? Feels_like.fromJson(json['feels_like'])
+        ? FeelsLike.fromJson(json['feels_like'])
         : null;
 
     _pressure = json['pressure'];
@@ -211,7 +211,7 @@ class Daily {
   int? _moonset;
   double? _moonPhase;
   Temp? _temp;
-  Feels_like? _feelsLike;
+  FeelsLike? _feelsLike;
   int? _pressure;
   int? _humidity;
   double? _dewPoint;
@@ -231,7 +231,7 @@ class Daily {
   int? get moonset => _moonset;
   double? get moonPhase => _moonPhase;
   Temp? get temp => _temp;
-  Feels_like? get feelsLike => _feelsLike;
+  FeelsLike? get feelsLike => _feelsLike;
   int? get pressure => _pressure;
   int? get humidity => _humidity;
   double? get dewPoint => _dewPoint;
@@ -322,8 +322,8 @@ class Weather {
 /// night : 11.72
 /// eve : 17.72
 /// morn : 14.76
-class Feels_like {
-  Feels_like({
+class FeelsLike {
+  FeelsLike({
     double? day,
     double? night,
     double? eve,
@@ -335,7 +335,7 @@ class Feels_like {
     _morn = morn;
   }
 
-  Feels_like.fromJson(dynamic json) {
+  FeelsLike.fromJson(dynamic json) {
     _day = json['day'].toDouble();
     _night = json['night'].toDouble();
     _eve = json['eve'].toDouble();

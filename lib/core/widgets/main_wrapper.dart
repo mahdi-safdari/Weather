@@ -16,7 +16,7 @@ class MainWrapper extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: BottomNav(Controller: pageController),
+      bottomNavigationBar: BottomNav(controller: pageController),
       body: Container(
         height: height,
         decoration: BoxDecoration(
