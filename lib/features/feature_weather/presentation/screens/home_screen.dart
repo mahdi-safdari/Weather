@@ -2,7 +2,6 @@ import 'package:clean_block_floor_lint_dio/features/feature_weather/data/models/
 import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_suggestion_city_usecase.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../../domain/use_cases/get_forecast_weather_usecase.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/widgets/dot_loading_widget.dart';
 import '../../domain/entities/forecase_days_entity.dart';
@@ -49,6 +48,28 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.03),
             child: TypeAheadField(
+              textFieldConfiguration: TextFieldConfiguration(
+                onSubmitted: (String prefix) {
+                  textEditingController.text = prefix;
+                  BlocProvider.of<HomeBloc>(context).add(LoadCwEvent(prefix));
+                },
+                controller: textEditingController,
+                style: DefaultTextStyle.of(context).style.copyWith(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  hintText: "Enter a City...",
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+              ),
               suggestionsCallback: (String pattern) {
                 return getSuggestionCityUseCase(pattern);
               },

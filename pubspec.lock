@@ -190,7 +190,7 @@ packages:
       name: loading_animation_widget
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0+3"
+    version: "1.2.0+4"
   matcher:
     dependency: transitive
     description:
@@ -239,7 +239,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.4"
+    version: "6.0.5"
   sky_engine:
     dependency: transitive
     description: flutter
