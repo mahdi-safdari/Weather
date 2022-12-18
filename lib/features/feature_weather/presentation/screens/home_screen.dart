@@ -1,16 +1,22 @@
-import 'package:clean_block_floor_lint_dio/core/params/forecast_param.dart';
-import 'package:clean_block_floor_lint_dio/core/widgets/app_background.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/data/models/forecast_days_model.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entities/forecase_days_entity.dart';
-import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/fw_status.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/data/models/suggest_city_model.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_suggestion_city_usecase.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+
+import '../../domain/use_cases/get_forecast_weather_usecase.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/widgets/dot_loading_widget.dart';
+import '../../domain/entities/forecase_days_entity.dart';
 import '../../domain/entities/current_city_entity.dart';
-import '../bloc/cw_status.dart';
-import '../bloc/home_bloc.dart';
+import '../../../../core/widgets/app_background.dart';
+import '../../../../core/params/forecast_param.dart';
+import '../../data/models/forecast_days_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/day_weather_view.dart';
+import 'package:flutter/material.dart';
+import '../../../../locator.dart';
+import '../bloc/cw_status.dart';
+import '../bloc/fw_status.dart';
+import '../bloc/home_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +28,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String cityName = "sast";
   PageController pageController = PageController();
+  TextEditingController textEditingController = TextEditingController();
+  GetSuggestionCityUseCase getSuggestionCityUseCase =
+      GetSuggestionCityUseCase(locator());
   @override
   void initState() {
     super.initState();
@@ -36,6 +45,29 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: height * 0.02),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+            child: TypeAheadField(
+              suggestionsCallback: (String pattern) {
+                return getSuggestionCityUseCase(pattern);
+              },
+              itemBuilder: (BuildContext context, Data itemData) {
+                return ListTile(
+                  leading: const Icon(Icons.location_on),
+                  title: Text(itemData.name!),
+                  subtitle: Text('${itemData.region}, ${itemData.country}'),
+                );
+              },
+              onSuggestionSelected: (Data suggestion) {
+                textEditingController.text = suggestion.name!;
+                BlocProvider.of<HomeBloc>(context)
+                    .add(LoadCwEvent(suggestion.name!));
+              },
+            ),
+          ),
+
+          //! main ui
           BlocBuilder<HomeBloc, HomeState>(
             buildWhen: (HomeState previous, HomeState current) {
               //! Rebuild just when current weather status changed
