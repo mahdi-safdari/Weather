@@ -11,7 +11,7 @@ abstract class CityDao {
   Future<City?> findCityByName(String name);
 
   @insert
-  Future<void> insertCity(City param);
+  Future<void> insertCity(City city);
 
   @Query('DELETE * FROM City WHERE name = :name')
   Future<void> deleteCityByName(String name);
