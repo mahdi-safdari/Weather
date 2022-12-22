@@ -9,8 +9,8 @@ abstract class DataState<T> {
   DataState(this.data, this.error);
 }
 
-class DataSucsses<T> extends DataState<T> {
-  DataSucsses(T? data) : super(data, null);
+class DataSuccess<T> extends DataState<T> {
+  DataSuccess(T? data) : super(data, null);
 }
 
 class DataFailed<T> extends DataState<T> {

@@ -28,7 +28,7 @@ class WeatherRepositoryImpl extends WeatherRepository {
       if (response.statusCode == 200) {
         CurrentCityEntity currentCityEntity =
             CurrentCityModel.fromJson(response.data);
-        return DataSucsses(currentCityEntity);
+        return DataSuccess(currentCityEntity);
       } else {
         return DataFailed(
             'Something went wrong try again ...'); //! Error Handling
@@ -46,7 +46,7 @@ class WeatherRepositoryImpl extends WeatherRepository {
       if (response.statusCode == 200) {
         ForecastDaysEntity forecastDaysEntity =
             ForecastDaysModel.fromJson(response.data);
-        return DataSucsses(forecastDaysEntity);
+        return DataSuccess(forecastDaysEntity);
       } else {
         return DataFailed('Something went wrong try again ...');
       }

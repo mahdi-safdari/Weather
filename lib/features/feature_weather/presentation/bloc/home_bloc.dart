@@ -37,7 +37,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         DataState dataState = await getCurrentWeatherUseCase(event.cityName);
 
         //! emit state to completed current weather event
-        if (dataState is DataSucsses) {
+        if (dataState is DataSuccess) {
           emit(
             state.copyWith(
               newCwStatus: CwCompleted(dataState.data),
@@ -68,7 +68,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         DataState dataState = await getForecastWeatherUseCase(event.params);
         //! emit state to Completed forecast weather event
-        if (dataState is DataSucsses) {
+        if (dataState is DataSuccess) {
           emit(
             state.copyWith(
               newFwStatus: FwCompleted(dataState.data),
