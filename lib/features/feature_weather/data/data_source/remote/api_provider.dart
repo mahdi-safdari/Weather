@@ -7,7 +7,7 @@ class ApiProvider {
   final String apiKey = Constants.apiKeys;
   final String baseUrl = Constants.baseUrl;
 
-  //! Current weather API CALL
+  //! current weather api call
   Future<dynamic> callCurrentWeather(cityName) async {
     var response = await _dio.get(
       '$baseUrl/data/2.5/weather',
