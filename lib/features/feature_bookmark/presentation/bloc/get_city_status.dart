@@ -11,7 +11,7 @@ class GetCityLoading extends GetCityStatus {
 
 //! complete state
 class GetCityCompleted extends GetCityStatus {
-  final City city;
+  final City? city;
   GetCityCompleted(this.city);
 
   @override

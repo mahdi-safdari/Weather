@@ -64,7 +64,7 @@ class BookMarkIcon extends StatelessWidget {
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(saveCityError.message),
+                    content: Text(saveCityError.message!),
                     behavior: SnackBarBehavior.floating, // Add this line
                   ),
                 );

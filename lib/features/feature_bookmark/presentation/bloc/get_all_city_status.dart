@@ -12,16 +12,16 @@ class GetAllCityLoading extends GetAllCityStatus {
 
 //! loaded state
 class GetAllCityCompleted extends GetAllCityStatus {
-  final List<City> city;
+  final List<City> cities;
 
-  GetAllCityCompleted(this.city);
+  GetAllCityCompleted(this.cities);
   @override
-  List<Object?> get props => [city];
+  List<Object?> get props => [cities];
 }
 
 //! Error state
 class GetAllCityError extends GetAllCityStatus {
-  final String message;
+  final String? message;
 
   GetAllCityError(this.message);
   @override

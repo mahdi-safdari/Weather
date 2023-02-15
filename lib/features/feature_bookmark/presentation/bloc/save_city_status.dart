@@ -26,7 +26,7 @@ class SaveCityCompleted extends SaveCityStatus {
 
 //! error state
 class SaveCityError extends SaveCityStatus {
-  final String message;
+  final String? message;
   SaveCityError(this.message);
 
   @override
