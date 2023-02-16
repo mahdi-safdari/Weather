@@ -54,7 +54,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     on<SaveCwEvent>((event, emit) async {
       //! emit loading state
       emit(state.copyWith(newSaveCityStatus: SaveCityLoading()));
-      DataState dataState = await getCityUseCase(event.name);
+      DataState dataState = await saveCityUseCase(event.name);
 
       //! emit complete state
       if (dataState is DataSuccess) {

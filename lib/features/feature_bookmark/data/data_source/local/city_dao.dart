@@ -13,6 +13,6 @@ abstract class CityDao {
   @insert
   Future<void> insertCity(City city);
 
-  @Query('DELETE * FROM City WHERE name = :name')
+  @Query('DELETE FROM City WHERE name = :name')
   Future<void> deleteCityByName(String name);
 }

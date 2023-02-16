@@ -25,7 +25,7 @@ class DeleteCityCompleted extends DeleteCityStatus {
 
 //! Error state
 class DeleteCityError extends DeleteCityStatus {
-  final String message;
+  final String? message;
 
   DeleteCityError(this.message);
   @override

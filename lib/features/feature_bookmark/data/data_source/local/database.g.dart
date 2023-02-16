@@ -132,7 +132,7 @@ class _$CityDao extends CityDao {
   @override
   Future<void> deleteCityByName(String name) async {
     await _queryAdapter
-        .queryNoReturn('DELETE * FROM City WHERE name = ?1', arguments: [name]);
+        .queryNoReturn('DELETE FROM City WHERE name = ?1', arguments: [name]);
   }
 
   @override
