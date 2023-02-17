@@ -1,4 +1,4 @@
-import '../../domain/entities/forecase_days_entity.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entities/forecase_days_entity.dart';
 
 /// lat : 51.4215
 /// lon : 35.6944
@@ -9,25 +9,18 @@ import '../../domain/entities/forecase_days_entity.dart';
 /// alerts : [{"sender_name":"","event":"Thunderstorms","start":1654408800,"end":1654452000,"description":"","tags":["Thunderstorm"]},{"sender_name":"","event":"Гроза","start":1654408800,"end":1654452000,"description":"местами гроза","tags":["Thunderstorm"]}]
 class ForecastDaysModel extends ForecastDaysEntity {
   const ForecastDaysModel({
-    double? lat,
-    double? lon,
-    String? timezone,
-    int? timezoneOffset,
-    Current? current,
-    List<Daily>? daily,
-    List<Alerts>? alerts,
-  }) : super(
-            lat: lat,
-            lon: lon,
-            timezone: timezone,
-            timezoneOffset: timezoneOffset,
-            current: current,
-            daily: daily,
-            alerts: alerts);
+    super.lat,
+    super.lon,
+    super.timezone,
+    super.timezoneOffset,
+    super.current,
+    super.daily,
+    super.alerts,
+  });
 
   factory ForecastDaysModel.fromJson(dynamic json) {
     /// convert daily from json
-    List<Daily> daily = [];
+    final List<Daily> daily = [];
     if (json['daily'] != null) {
       json['daily'].forEach((v) {
         daily.add(Daily.fromJson(v));
@@ -35,7 +28,7 @@ class ForecastDaysModel extends ForecastDaysEntity {
     }
 
     /// convert alerts from json
-    List<Alerts> alerts = [];
+    final List<Alerts> alerts = [];
     if (json['alerts'] != null) {
       json['alerts'].forEach((v) {
         alerts.add(Alerts.fromJson(v));

@@ -1,16 +1,16 @@
-import '../../domain/entities/suggest_city_entity.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/entities/suggest_city_entity.dart';
 
 /// data : [{"id":58764,"wikiDataId":"Q605157","type":"CITY","city":"Babol","name":"Babol","country":"Iran","countryCode":"IR","region":"Mazandaran","regionCode":"21","latitude":36.55,"longitude":52.683333333,"population":250217}]
 /// metadata : {"currentOffset":0,"totalCount":1}
 class SuggestCityModel extends SuggestCityEntity {
   const SuggestCityModel({
-    List<Data>? data,
-    Metadata? metadata,
-  }) : super(data: data, metadata: metadata);
+    super.data,
+    super.metadata,
+  });
 
   factory SuggestCityModel.fromJson(dynamic json) {
     /// parse json to object
-    List<Data> data = [];
+    final List<Data> data = [];
     if (json['data'] != null) {
       json['data'].forEach((v) {
         data.add(Data.fromJson(v));

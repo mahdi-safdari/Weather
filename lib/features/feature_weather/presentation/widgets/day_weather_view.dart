@@ -1,7 +1,7 @@
+import 'package:clean_block_floor_lint_dio/core/utils/date_converter.dart';
+import 'package:clean_block_floor_lint_dio/core/widgets/app_background.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/data/models/forecast_days_model.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/utils/date_converter.dart';
-import '../../../../core/widgets/app_background.dart';
-import '../../data/models/forecast_days_model.dart';
 
 class DaysWeatherView extends StatefulWidget {
   final Daily daily;
@@ -22,13 +22,18 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
     super.initState();
 
     animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
     animation = Tween(
       begin: -1.0,
       end: 0.0,
-    ).animate(CurvedAnimation(
+    ).animate(
+      CurvedAnimation(
         parent: animationController,
-        curve: const Interval(0.5, 1, curve: Curves.decelerate)));
+        curve: const Interval(0.5, 1, curve: Curves.decelerate),
+      ),
+    );
     animationController.forward();
   }
 
@@ -59,7 +64,8 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
                     Padding(
                       padding: const EdgeInsets.only(top: 5.0),
                       child: AppBackground.setIconForMain(
-                          widget.daily.weather![0].description),
+                        widget.daily.weather![0].description,
+                      ),
                     ),
                     Expanded(
                       child: Padding(
@@ -67,7 +73,9 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
                         child: Text(
                           "${widget.daily.temp!.day!.round()}\u00B0",
                           style: const TextStyle(
-                              fontSize: 15, color: Colors.white),
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

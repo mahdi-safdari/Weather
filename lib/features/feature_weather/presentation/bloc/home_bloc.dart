@@ -1,11 +1,12 @@
-import '../../domain/use_cases/get_forecast_weather_usecase.dart';
-import '../../domain/use_cases/get_current_weather_usecase.dart';
-import '../../../../core/params/forecast_param.dart';
-import '../../../../core/resources/data_state.dart';
-import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
-import 'cw_status.dart';
-import 'fw_status.dart';
+import 'package:clean_block_floor_lint_dio/core/params/forecast_param.dart';
+import 'package:clean_block_floor_lint_dio/core/resources/data_state.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_current_weather_usecase.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/domain/use_cases/get_forecast_weather_usecase.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/cw_status.dart';
+import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/fw_status.dart';
+import 'package:equatable/equatable.dart';
+
 part 'home_event.dart';
 part 'home_state.dart';
 
@@ -34,7 +35,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ),
         );
 
-        DataState dataState = await getCurrentWeatherUseCase(event.cityName);
+        final DataState dataState =
+            await getCurrentWeatherUseCase(event.cityName);
 
         //! emit state to completed current weather event
         if (dataState is DataSuccess) {
@@ -66,7 +68,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ),
         );
 
-        DataState dataState = await getForecastWeatherUseCase(event.params);
+        final DataState dataState =
+            await getForecastWeatherUseCase(event.params);
         //! emit state to Completed forecast weather event
         if (dataState is DataSuccess) {
           emit(
