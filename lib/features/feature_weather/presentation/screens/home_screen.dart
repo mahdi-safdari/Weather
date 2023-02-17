@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:clean_block_floor_lint_dio/features/feature_bookmark/presentation/bloc/bookmark_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
@@ -29,7 +27,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   String cityName = "Tehran";
   PageController pageController = PageController();
   TextEditingController textEditingController = TextEditingController();
@@ -135,7 +134,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-
           //! main ui
           BlocBuilder<HomeBloc, HomeState>(
             buildWhen: (HomeState previous, HomeState current) {
@@ -545,4 +543,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

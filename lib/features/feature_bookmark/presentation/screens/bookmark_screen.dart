@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookMarkScreen extends StatelessWidget {
-  const BookMarkScreen({super.key});
+  final PageController pageController;
+  const BookMarkScreen({super.key, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +62,11 @@ class BookMarkScreen extends StatelessWidget {
                               //! cast for getting bookmark city data
                               BlocProvider.of<HomeBloc>(context)
                                   .add(LoadCwEvent(city.name));
+                              pageController.animateToPage(
+                                0,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8),

@@ -5,16 +5,19 @@ class AppBackground {
   static AssetImage getBackGroundImage() {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('kk').format(now);
+    //! Day
     if (6 > int.parse(formattedDate)) {
-      return const AssetImage('assets/images/nightpic.jpg');
-    } else if (18 > int.parse(formattedDate)) {
-      return const AssetImage('assets/images/pic_bg.jpg');
+      return const AssetImage('assets/back/CloudD.jfif');
+    }
+    //! Night
+    else if (18 > int.parse(formattedDate)) {
+      return const AssetImage('assets/back/ClearD.png');
     } else {
-      return const AssetImage('assets/images/nightpic.jpg');
+      return const AssetImage('assets/back/CloudD.jfif');
     }
   }
 
-  static Image setIconForMain(description) {
+  static Widget setIconForMain(description) {
     if (description == "clear sky") {
       return const Image(
           image: AssetImage(
