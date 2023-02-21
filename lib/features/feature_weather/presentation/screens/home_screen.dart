@@ -320,6 +320,12 @@ class _HomeScreenState extends State<HomeScreen>
                               "sunset",
                               "humidity",
                             ];
+                            final List listImage = [
+                              'assets/images/wind.png',
+                              'assets/images/sunrise.png',
+                              'assets/images/sunrise.png',
+                              'assets/images/drop.png',
+                            ];
                             final List listValue = [
                               "${currentCityEntity.wind!.speed!} m/s",
                               sunrise,
@@ -347,6 +353,17 @@ class _HomeScreenState extends State<HomeScreen>
                                           fontSize: height * 0.025,
                                           color: Colors.white,
                                           fontFamily: 'comic',
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              listImage[index],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Text(
