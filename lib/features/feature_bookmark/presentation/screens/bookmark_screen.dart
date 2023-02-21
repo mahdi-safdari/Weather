@@ -42,16 +42,21 @@ class BookMarkScreen extends StatelessWidget {
               const Text(
                 'Watch List',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
+                    color: Colors.white, fontSize: 25, fontFamily: 'eras'),
               ),
               const SizedBox(height: 20),
               Expanded(
                 //! show text in center if there is no city bookmark
                 child: (cities.isEmpty)
                     ? const Center(
-                        child: Text('There is no city Bookmark'),
+                        child: Text(
+                          'There is no city Bookmark.',
+                          style: TextStyle(
+                            fontFamily: 'comic',
+                            color: Colors.white,
+                            fontSize: 28,
+                          ),
+                        ),
                       )
                     : ListView.builder(
                         itemCount: cities.length,
@@ -90,11 +95,12 @@ class BookMarkScreen extends StatelessWidget {
                                           Text(
                                             city.name,
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20),
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: 'comic',
+                                            ),
                                           ),
-                                          IconButton(
+                                          TextButton(
                                             onPressed: () {
                                               BlocProvider.of<BookmarkBloc>(
                                                       context)
@@ -104,9 +110,13 @@ class BookMarkScreen extends StatelessWidget {
                                                       context)
                                                   .add(GetAllCityEvent());
                                             },
-                                            icon: const Icon(
-                                              Icons.delete,
-                                              color: Colors.redAccent,
+                                            child: Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                fontFamily: 'comic',
+                                                fontSize: 16,
+                                                color: Colors.red,
+                                              ),
                                             ),
                                           ),
                                         ],

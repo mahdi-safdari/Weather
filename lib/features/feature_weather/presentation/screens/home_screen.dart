@@ -66,11 +66,12 @@ class _HomeScreenState extends State<HomeScreen>
                       style: DefaultTextStyle.of(context).style.copyWith(
                             fontSize: 20,
                             color: Colors.white,
+                            fontFamily: 'comic',
                           ),
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        hintText: "Enter a City...",
-                        hintStyle: TextStyle(color: Colors.white),
+                        hintText: "Search a City...",
+                        hintStyle: TextStyle(color: Colors.grey),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
@@ -85,9 +86,14 @@ class _HomeScreenState extends State<HomeScreen>
                     itemBuilder: (BuildContext context, Data itemData) {
                       return ListTile(
                         leading: const Icon(Icons.location_on),
-                        title: Text(itemData.name!),
-                        subtitle:
-                            Text('${itemData.region}, ${itemData.country}'),
+                        title: Text(
+                          itemData.name!,
+                          style: TextStyle(fontFamily: 'comic'),
+                        ),
+                        subtitle: Text(
+                          '${itemData.region}, ${itemData.country}',
+                          style: TextStyle(fontFamily: 'comic'),
+                        ),
                       );
                     },
                     onSuggestionSelected: (Data suggestion) {
@@ -181,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen>
                           width: 100,
                           height: 420,
 
-                          //!
+                          //! current weather
                           child: Column(
                             children: <Widget>[
                               //! city name
@@ -192,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'eras',
-                                    fontSize: 30,
+                                    fontSize: 35,
                                   ),
                                 ),
                               ),
@@ -245,6 +251,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 16,
+                                            fontFamily: 'comic',
                                           ),
                                         ),
                                         const SizedBox(height: 10),
@@ -253,6 +260,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
+                                            fontFamily: 'comic',
                                           ),
                                         ),
                                       ],
@@ -275,6 +283,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 16,
+                                            fontFamily: 'comic',
                                           ),
                                         ),
                                         const SizedBox(height: 10),
@@ -283,6 +292,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
+                                            fontFamily: 'comic',
                                           ),
                                         ),
                                       ],
@@ -360,6 +370,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 );
               }
+              //! Error data
               if (state.cwStatus is CwError) {
                 return const Center(
                   child: Text('Error'),
