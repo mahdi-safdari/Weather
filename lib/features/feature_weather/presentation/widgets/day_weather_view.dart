@@ -43,7 +43,7 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
 
     return AnimatedBuilder(
       animation: animationController,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return Transform(
           transform:
               Matrix4.translationValues(animation.value * width, 0.0, 0.0),

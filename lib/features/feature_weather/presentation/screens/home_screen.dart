@@ -198,6 +198,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         currentCityEntity.name!,
                                         style: const TextStyle(
                                           color: Colors.white,
+                                          fontFamily: 'eras',
                                           fontSize: 30,
                                         ),
                                       ),
@@ -231,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       child: Text(
                                         "${currentCityEntity.main!.temp!.round()}\u00B0",
                                         style: const TextStyle(
+                                          fontFamily: 'eras',
                                           color: Colors.white,
                                           fontSize: 50,
                                         ),

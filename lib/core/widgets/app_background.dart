@@ -7,13 +7,13 @@ class AppBackground {
     final String formattedDate = DateFormat('kk').format(now);
     //! Day
     if (6 > int.parse(formattedDate)) {
-      return const AssetImage('assets/back/CloudD.jfif');
+      return const AssetImage('assets/back/night.png');
     }
     //! Night
     else if (18 > int.parse(formattedDate)) {
-      return const AssetImage('assets/back/ClearD.png');
+      return const AssetImage('assets/back/after_noon.png');
     } else {
-      return const AssetImage('assets/back/CloudD.jfif');
+      return const AssetImage('assets/back/night.png');
     }
   }
 
