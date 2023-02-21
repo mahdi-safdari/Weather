@@ -11,7 +11,7 @@ class AppBackground {
     }
     //! Night
     else if (18 > int.parse(formattedDate)) {
-      return const AssetImage('assets/back/after_noon.png');
+      return const AssetImage('assets/back/night.png');
     } else {
       return const AssetImage('assets/back/night.png');
     }
