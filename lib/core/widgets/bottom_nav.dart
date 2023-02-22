@@ -6,38 +6,45 @@ class BottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          IconButton(
-            onPressed: () {
-              controller.animateToPage(0,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut);
-            },
-            icon: SizedBox(
-              width: 30,
-              height: 30,
-              child: Image.asset('assets/images/home.png'),
-            ),
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Card(
+          margin: EdgeInsets.fromLTRB(80, 0, 80, 20),
+          elevation: 1,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                onPressed: () {
+                  controller.animateToPage(0,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
+                },
+                icon: SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: Image.asset('assets/images/home.png'),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  controller.animateToPage(1,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
+                },
+                icon: SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: Image.asset('assets/images/bookmark.png'),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(),
-          IconButton(
-            onPressed: () {
-              controller.animateToPage(1,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut);
-            },
-            icon: SizedBox(
-              width: 30,
-              height: 30,
-              child: Image.asset('assets/images/bookmark.png'),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

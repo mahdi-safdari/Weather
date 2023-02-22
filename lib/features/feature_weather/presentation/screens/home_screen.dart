@@ -176,137 +176,133 @@ class _HomeScreenState extends State<HomeScreen>
                 return Expanded(
                   child: ListView(
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: height * 0.02),
-                        child: Container(
-                          width: 100,
-                          height: 420,
+                      Container(
+                        width: 100,
+                        height: 420,
 
-                          //! current weather
-                          child: Column(
-                            children: <Widget>[
-                              //! city name
-                              Padding(
-                                padding: const EdgeInsets.only(top: 50),
-                                child: Text(
-                                  currentCityEntity.name!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'eras',
-                                    fontSize: 35,
-                                  ),
+                        //! current weather
+                        child: Column(
+                          children: <Widget>[
+                            //! city name
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Text(
+                                currentCityEntity.name!,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'eras',
+                                  fontSize: 35,
                                 ),
                               ),
+                            ),
 
-                              //! city description
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Text(
+                            //! city description
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Text(
+                                currentCityEntity.weather![0].description!,
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontFamily: 'comic',
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+
+                            //! weather icon
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: AppBackground.setIconForMain(
                                   currentCityEntity.weather![0].description!,
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontFamily: 'comic',
-                                    fontSize: 20,
-                                  ),
                                 ),
                               ),
+                            ),
 
-                              //! weather icon
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: AppBackground.setIconForMain(
-                                    currentCityEntity.weather![0].description!,
-                                  ),
+                            //! weather temp
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Text(
+                                "${currentCityEntity.main!.temp!.round()}\u00B0",
+                                style: const TextStyle(
+                                  fontFamily: 'eras',
+                                  color: Colors.white,
+                                  fontSize: 50,
                                 ),
                               ),
+                            ),
 
-                              //! weather temp
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Text(
-                                  "${currentCityEntity.main!.temp!.round()}\u00B0",
-                                  style: const TextStyle(
-                                    fontFamily: 'eras',
-                                    color: Colors.white,
-                                    fontSize: 50,
-                                  ),
-                                ),
-                              ),
-
-                              //! max & min Temp
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    //! Max Temp
-                                    Column(
-                                      children: <Widget>[
-                                        const Text(
-                                          'max',
-                                          style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 16,
-                                            fontFamily: 'comic',
-                                          ),
+                            //! max & min Temp
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  //! Max Temp
+                                  Column(
+                                    children: <Widget>[
+                                      const Text(
+                                        'max',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                          fontFamily: 'comic',
                                         ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          "${currentCityEntity.main!.tempMax!.round()}\u00B0",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'comic',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    //! Divider
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 10, left: 10),
-                                      child: Container(
-                                        color: Colors.grey,
-                                        width: 2,
-                                        height: 40,
                                       ),
-                                    ),
-                                    //! Min Temp
-                                    Column(
-                                      children: <Widget>[
-                                        const Text(
-                                          'min',
-                                          style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 16,
-                                            fontFamily: 'comic',
-                                          ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        "${currentCityEntity.main!.tempMax!.round()}\u00B0",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: 'comic',
                                         ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          "${currentCityEntity.main!.tempMin!.round()}\u00B0",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'comic',
-                                          ),
-                                        ),
-                                      ],
+                                      ),
+                                    ],
+                                  ),
+                                  //! Divider
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 10, left: 10),
+                                    child: Container(
+                                      color: Colors.grey,
+                                      width: 2,
+                                      height: 40,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  //! Min Temp
+                                  Column(
+                                    children: <Widget>[
+                                      const Text(
+                                        'min',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                          fontFamily: 'comic',
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        "${currentCityEntity.main!.tempMin!.round()}\u00B0",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: 'comic',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-
                       //! List Viwe
                       SizedBox(
-                        height: 170,
+                        height: height * 0.225,
                         width: width,
                         child: ListView.builder(
                           itemCount: 4,
@@ -315,33 +311,33 @@ class _HomeScreenState extends State<HomeScreen>
                           itemBuilder: (BuildContext context, int index) {
                             final List listName = [
                               "wind speed",
+                              "humidity",
                               "sunrise",
                               "sunset",
-                              "humidity",
                             ];
                             final List listImage = [
                               'assets/images/wind.png',
-                              'assets/images/sunrise.png',
-                              'assets/images/sunrise.png',
                               'assets/images/drop.png',
+                              'assets/images/sunrise.png',
+                              'assets/images/sunrise.png',
                             ];
                             final List listValue = [
                               "${currentCityEntity.wind!.speed!} m/s",
+                              "${currentCityEntity.main!.humidity!}%",
                               sunrise,
                               sunset,
-                              "${currentCityEntity.main!.humidity!}%",
                             ];
                             return SizedBox(
                               height: 150,
                               width: 140,
                               child: Card(
-                                color: Colors.grey.withOpacity(0.123),
+                                color: Colors.grey.withOpacity(0.22),
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(7))),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(14.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -368,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       Text(
                                         listValue[index],
                                         style: TextStyle(
-                                          fontSize: height * 0.022,
+                                          fontSize: height * 0.019,
                                           color: Colors.grey,
                                           fontFamily: 'comic',
                                         ),
