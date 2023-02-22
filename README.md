@@ -1,5 +1,5 @@
 # Weather app
-<p align="center"><img src="assets/screenshot-1.png" /></p>
+<p align="center"><img src="assets/Screenshot.png" /></p>
 
 This project is written in the Flutter framework and makes use of the `api.openweathermap.org` API to provide accurate current weather information.
 
