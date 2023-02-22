@@ -6,31 +6,37 @@ class BottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 20,
-      height: 50,
-      color: Colors.white,
-      child: SizedBox(
-        height: 63,
-        child: Row(
-          children: <Widget>[
-            IconButton(
-                onPressed: () {
-                  controller.animateToPage(0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut);
-                },
-                icon: const Icon(Icons.home)),
-            const SizedBox(),
-            IconButton(
-                onPressed: () {
-                  controller.animateToPage(1,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut);
-                },
-                icon: const Icon(Icons.bookmark)),
-          ],
-        ),
+    return SizedBox(
+      height: 60,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          IconButton(
+            onPressed: () {
+              controller.animateToPage(0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut);
+            },
+            icon: SizedBox(
+              width: 30,
+              height: 30,
+              child: Image.asset('assets/images/home.png'),
+            ),
+          ),
+          const SizedBox(),
+          IconButton(
+            onPressed: () {
+              controller.animateToPage(1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut);
+            },
+            icon: SizedBox(
+              width: 30,
+              height: 30,
+              child: Image.asset('assets/images/bookmark.png'),
+            ),
+          ),
+        ],
       ),
     );
   }

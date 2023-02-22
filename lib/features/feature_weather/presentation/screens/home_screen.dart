@@ -1,23 +1,18 @@
 import 'package:clean_block_floor_lint_dio/features/feature_bookmark/presentation/bloc/bookmark_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/utils/date_converter.dart';
 import '../../domain/use_cases/get_suggestion_city_usecase.dart';
 import '../../../../core/widgets/dot_loading_widget.dart';
-import '../../domain/entities/forecase_days_entity.dart';
 import '../../domain/entities/current_city_entity.dart';
 import '../../../../core/widgets/app_background.dart';
 import '../../../../core/params/forecast_param.dart';
-import '../../data/models/forecast_days_model.dart';
 import '../../data/models/suggest_city_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/bookmark_icon.dart';
-import '../widgets/day_weather_view.dart';
 import 'package:flutter/material.dart';
 import '../../../../locator.dart';
 import '../bloc/cw_status.dart';
-import '../bloc/fw_status.dart';
 import '../bloc/home_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -219,8 +214,12 @@ class _HomeScreenState extends State<HomeScreen>
                               //! weather icon
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
-                                child: AppBackground.setIconForMain(
-                                  currentCityEntity.weather![0].description!,
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: AppBackground.setIconForMain(
+                                    currentCityEntity.weather![0].description!,
+                                  ),
                                 ),
                               ),
 
@@ -307,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen>
 
                       //! List Viwe
                       SizedBox(
-                        height: 150,
+                        height: 170,
                         width: width,
                         child: ListView.builder(
                           itemCount: 4,
