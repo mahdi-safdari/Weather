@@ -10,7 +10,7 @@ class AppBackground {
       return const AssetImage('assets/back/night.png');
     }
     //! Night
-    else if (18 < int.parse(formattedDate)) {
+    else if (18 > int.parse(formattedDate)) {
       return const AssetImage('assets/back/after_noon.png');
     } else {
       return const AssetImage('assets/back/night.png');
