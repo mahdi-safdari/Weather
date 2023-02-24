@@ -10,7 +10,7 @@ class BottomNav extends StatelessWidget {
       alignment: Alignment.center,
       children: <Widget>[
         Card(
-          margin: EdgeInsets.fromLTRB(80, 0, 80, 20),
+          margin: EdgeInsets.fromLTRB(80, 0, 80, 12),
           elevation: 1,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
