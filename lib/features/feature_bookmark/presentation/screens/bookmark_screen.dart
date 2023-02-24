@@ -92,13 +92,28 @@ class BookMarkScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          Text(
-                                            city.name,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontFamily: 'comic',
-                                            ),
+                                          Row(
+                                            children: <Widget>[
+                                              Container(
+                                                width: 30,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/images/placeholder.png'),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                city.name,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontFamily: 'eras',
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           TextButton(
                                             onPressed: () {
@@ -110,12 +125,14 @@ class BookMarkScreen extends StatelessWidget {
                                                       context)
                                                   .add(GetAllCityEvent());
                                             },
-                                            child: Text(
-                                              'Delete',
-                                              style: TextStyle(
-                                                fontFamily: 'comic',
-                                                fontSize: 16,
-                                                color: Colors.red,
+                                            child: Container(
+                                              width: 30,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/trash.png'),
+                                                ),
                                               ),
                                             ),
                                           ),

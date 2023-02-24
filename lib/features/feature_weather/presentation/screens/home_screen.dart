@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen>
                     children: <Widget>[
                       Container(
                         width: 100,
-                        height: 420,
+                        height: 380,
 
                         //! current weather
                         child: Column(
@@ -206,8 +206,8 @@ class _HomeScreenState extends State<HomeScreen>
                               padding: const EdgeInsets.only(top: 20),
                               child: Text(
                                 currentCityEntity.weather![0].description!,
-                                style: const TextStyle(
-                                  color: Colors.grey,
+                                style: TextStyle(
+                                  color: Colors.blueAccent[100],
                                   fontFamily: 'comic',
                                   fontSize: 20,
                                 ),
@@ -228,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen>
 
                             //! weather temp
                             Padding(
-                              padding: const EdgeInsets.only(top: 20),
+                              padding: const EdgeInsets.only(top: 5),
                               child: Text(
                                 "${currentCityEntity.main!.temp!.round()}\u00B0",
                                 style: const TextStyle(
@@ -248,10 +248,10 @@ class _HomeScreenState extends State<HomeScreen>
                                   //! Max Temp
                                   Column(
                                     children: <Widget>[
-                                      const Text(
+                                      Text(
                                         'max',
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.blueAccent[100],
                                           fontSize: 16,
                                           fontFamily: 'comic',
                                         ),
@@ -262,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
-                                          fontFamily: 'comic',
+                                          fontFamily: 'eras',
                                         ),
                                       ),
                                     ],
@@ -272,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     padding: const EdgeInsets.only(
                                         right: 10, left: 10),
                                     child: Container(
-                                      color: Colors.grey,
+                                      color: Colors.blueAccent[100],
                                       width: 2,
                                       height: 40,
                                     ),
@@ -280,10 +280,10 @@ class _HomeScreenState extends State<HomeScreen>
                                   //! Min Temp
                                   Column(
                                     children: <Widget>[
-                                      const Text(
+                                      Text(
                                         'min',
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.blueAccent[100],
                                           fontSize: 16,
                                           fontFamily: 'comic',
                                         ),
@@ -294,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
-                                          fontFamily: 'comic',
+                                          fontFamily: 'eras',
                                         ),
                                       ),
                                     ],
@@ -305,36 +305,124 @@ class _HomeScreenState extends State<HomeScreen>
                           ],
                         ),
                       ),
+
+                      //! forcast weather 5 day
+                      const Padding(
+                        padding: EdgeInsets.only(left: 15.0),
+                        child: Text(
+                          'Forcast weather 5 day',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontFamily: 'comic',
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Center(
+                            child: BlocBuilder<HomeBloc, HomeState>(
+                              builder: (BuildContext context, state) {
+                                //! show Loading State for Fw
+                                if (state.fwStatus is FwLoading) {
+                                  return const DotLoadingWidget();
+                                }
+
+                                //! show Completed State for Fw
+                                if (state.fwStatus is FwCompleted) {
+                                  //! casting
+                                  final FwCompleted fwCompleted =
+                                      state.fwStatus as FwCompleted;
+                                  final ForecastDaysEntity forecastDaysEntity =
+                                      fwCompleted.forecastDaysEntity;
+                                  final List<ListElement> mainDaily =
+                                      forecastDaysEntity.list!;
+
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 40,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return DaysWeatherView(
+                                        list: mainDaily[index],
+                                        city: forecastDaysEntity.city!,
+                                      );
+                                    },
+                                  );
+                                }
+
+                                //! show Error State for Fw
+                                if (state.fwStatus is FwError) {
+                                  final FwError fwError =
+                                      state.fwStatus as FwError;
+                                  return Center(
+                                    child: Text(fwError.messeage),
+                                  );
+                                }
+
+                                //! show Default State for Fw
+                                return Container();
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+
                       //! List Viwe
+                      const Padding(
+                        padding: EdgeInsets.only(left: 15.0, bottom: 8),
+                        child: Text(
+                          'Other current data',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontFamily: 'comic',
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: height * 0.225,
                         width: width,
                         child: ListView.builder(
-                          itemCount: 4,
+                          itemCount: 6,
                           padding: EdgeInsets.only(left: 10),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
+                            final visibility =
+                                (currentCityEntity.visibility! / 1000)
+                                    .toStringAsFixed(0);
                             final List listName = [
-                              "wind speed",
-                              "humidity",
-                              "sunrise",
-                              "sunset",
+                              "Wind speed",
+                              "Humidity",
+                              "Sunrise",
+                              "Visibility",
+                              "Sunset",
+                              "Clouds",
                             ];
                             final List listImage = [
                               'assets/images/wind.png',
                               'assets/images/drop.png',
                               'assets/images/sunrise.png',
+                              'assets/images/visibility.png',
                               'assets/images/sunrise.png',
+                              'assets/images/precipitation.png',
                             ];
                             final List listValue = [
-                              "${currentCityEntity.wind!.speed!} m/s",
+                              "${currentCityEntity.wind!.speed} m/s",
                               "${currentCityEntity.main!.humidity!}%",
                               sunrise,
+                              "$visibility km",
                               sunset,
+                              "${currentCityEntity.clouds!.all}%",
                             ];
                             return SizedBox(
-                              height: 150,
-                              width: 140,
+                              height: 130,
+                              width: 110,
                               child: Card(
                                 color: Colors.grey.withOpacity(0.22),
                                 elevation: 0,
@@ -350,14 +438,14 @@ class _HomeScreenState extends State<HomeScreen>
                                       Text(
                                         listName[index],
                                         style: TextStyle(
-                                          fontSize: height * 0.025,
+                                          fontSize: 15,
                                           color: Colors.white,
                                           fontFamily: 'comic',
                                         ),
                                       ),
                                       Container(
-                                        height: 40,
-                                        width: 40,
+                                        height: 30,
+                                        width: 30,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: AssetImage(
@@ -369,8 +457,8 @@ class _HomeScreenState extends State<HomeScreen>
                                       Text(
                                         listValue[index],
                                         style: TextStyle(
-                                          fontSize: height * 0.019,
-                                          color: Colors.grey,
+                                          fontSize: 12,
+                                          color: Colors.black87,
                                           fontFamily: 'comic',
                                         ),
                                       ),
@@ -380,64 +468,6 @@ class _HomeScreenState extends State<HomeScreen>
                               ),
                             );
                           },
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      //! forcast weather 5 day
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: 100,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Center(
-                              child: BlocBuilder<HomeBloc, HomeState>(
-                                builder: (BuildContext context, state) {
-                                  /// show Loading State for Fw
-                                  if (state.fwStatus is FwLoading) {
-                                    return const DotLoadingWidget();
-                                  }
-
-                                  /// show Completed State for Fw
-                                  if (state.fwStatus is FwCompleted) {
-                                    /// casting
-                                    final FwCompleted fwCompleted =
-                                        state.fwStatus as FwCompleted;
-                                    final ForecastDaysEntity
-                                        forecastDaysEntity =
-                                        fwCompleted.forecastDaysEntity;
-                                    final List<ListElement> mainDaily =
-                                        forecastDaysEntity.list!;
-
-                                    return ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: 40,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return DaysWeatherView(
-                                          list: mainDaily[index],
-                                        );
-                                      },
-                                    );
-                                  }
-
-                                  /// show Error State for Fw
-                                  if (state.fwStatus is FwError) {
-                                    final FwError fwError =
-                                        state.fwStatus as FwError;
-                                    return Center(
-                                      child: Text(fwError.messeage),
-                                    );
-                                  }
-
-                                  /// show Default State for Fw
-                                  return Container();
-                                },
-                              ),
-                            ),
-                          ),
                         ),
                       ),
                       const SizedBox(height: 30),

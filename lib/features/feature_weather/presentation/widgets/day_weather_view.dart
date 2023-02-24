@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class DaysWeatherView extends StatefulWidget {
   final ListElement list;
-  const DaysWeatherView({super.key, required this.list});
+  final City city;
+  const DaysWeatherView({super.key, required this.list, required this.city});
 
   @override
   State<DaysWeatherView> createState() => _DaysWeatherViewState();
@@ -18,7 +19,6 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     animationController = AnimationController(
@@ -50,13 +50,26 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
               color: Colors.transparent,
               elevation: 0,
               child: SizedBox(
-                width: 50,
+                width: 40,
                 height: 50,
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Text(
                       DateConverter.changeDtToDateTime(widget.list.dt),
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black87,
+                        fontFamily: 'comic',
+                      ),
+                    ),
+                    Text(
+                      DateConverter.changeDtToDateTimeHour(
+                          widget.list.dt, widget.city.timezone),
+                      style: TextStyle(
+                        fontSize: 8,
+                        color: Colors.grey,
+                        fontFamily: 'eras',
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 5.0),
@@ -72,6 +85,7 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
                           style: const TextStyle(
                             fontSize: 15,
                             color: Colors.white,
+                            fontFamily: 'eras',
                           ),
                         ),
                       ),
