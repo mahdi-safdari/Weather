@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
           SizedBox(height: height * 0.02),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+            //! Search box
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -377,6 +378,8 @@ class _HomeScreenState extends State<HomeScreen>
                           },
                         ),
                       ),
+                      const SizedBox(height: 30),
+                      //! forcast weather 5 day
                       const SizedBox(height: 30),
                     ],
                   ),
