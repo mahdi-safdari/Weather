@@ -53,18 +53,22 @@ class WeatherRepositoryImpl extends WeatherRepository {
       } else {
         return DataFailed('Something went wrong try again ...');
       }
+      //! Error Handling
     } catch (e) {
-      return DataFailed(
-          'Please check your connection ...$e'); //! Error Handling
+      return DataFailed('Please check your connection ...');
     }
   }
 
   @override
   Future<List<Data>> fetchSuggestData(dynamic cityName) async {
-    final Response response =
-        await apiProvider.sendRequestCitySuggestion(cityName);
-    final SuggestCityEntity suggestCityEntity =
-        SuggestCityModel.fromJson(response.data);
-    return suggestCityEntity.data!;
+    try {
+      final Response response =
+          await apiProvider.sendRequestCitySuggestion(cityName);
+      final SuggestCityEntity suggestCityEntity =
+          SuggestCityModel.fromJson(response.data);
+      return suggestCityEntity.data!;
+    } catch (e) {
+      return [];
+    }
   }
 }
