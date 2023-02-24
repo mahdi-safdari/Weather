@@ -413,11 +413,9 @@ class _HomeScreenState extends State<HomeScreen>
                                     return ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: 8,
-                                      itemBuilder: (
-                                        BuildContext context,
-                                        int index,
-                                      ) {
+                                      itemCount: 40,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
                                         return DaysWeatherView(
                                           list: mainDaily[index],
                                         );

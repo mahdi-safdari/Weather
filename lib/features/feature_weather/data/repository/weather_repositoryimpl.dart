@@ -54,7 +54,8 @@ class WeatherRepositoryImpl extends WeatherRepository {
         return DataFailed('Something went wrong try again ...');
       }
     } catch (e) {
-      return DataFailed('Please check your connection ...'); //! Error Handling
+      return DataFailed(
+          'Please check your connection ...$e'); //! Error Handling
     }
   }
 

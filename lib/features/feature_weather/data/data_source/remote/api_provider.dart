@@ -21,14 +21,13 @@ class ApiProvider {
     return response;
   }
 
-//! Forcast API 7 Days
+//! Forcast API 5 Days
   Future<dynamic> senRequest7DaysForcast(ForecastParams params) async {
     var response = await _dio.get(
-      '$baseUrl/data/2.5/onecall',
+      '$baseUrl/data/2.5/forecast',
       queryParameters: {
         'lat': params.lat,
         'lon': params.lon,
-        'exclude': 'minutely,hourly',
         'appid': apiKey,
         'units': 'metric',
       },
