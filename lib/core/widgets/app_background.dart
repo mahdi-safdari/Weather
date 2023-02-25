@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -15,6 +17,42 @@ class AppBackground {
     } else {
       return const AssetImage('assets/back/night.png');
     }
+  }
+
+  static BoxDecoration decorationGradient() {
+    final list = [
+      [Color(0xff3f51b5), Color(0xfff44336)],
+      [Color(0xffff9800), Color(0xff2196f3)],
+      [Color(0xffffeb3b), Color(0xff00bcd4)],
+      [Color(0xff795548), Color(0xff2196f3)],
+      [Color(0xff00bcd4), Color(0xff673ab7)],
+      [Color(0xff2196f3), Color(0xff00bcd4)],
+      [Color(0xff673ab7), Color(0xffff5722)],
+      [Color(0xff9c27b0), Color(0xff673ab7)],
+      [Color(0xff00bcd4), Color(0xff3f51b5)],
+      [Color(0xff3f51b5), Color(0xffe91e63)],
+      [Color(0xff009688), Color(0xff3f51b5)],
+      [Color(0xff03a9f4), Color(0xff9c27b0)],
+      [Color(0xff03a9f4), Color(0xff9c27b0)],
+      [Color(0xff3f51b5), Color(0xff9c27b0)],
+      [Color(0xff00bcd4), Color(0xffe91e63)],
+      [Color(0xff009688), Color(0xffe91e63)],
+      [Color(0xff03a9f4), Color(0xffe91e63)],
+      [Color(0xff3f51b5), Color(0xff00bcd4)],
+      [Color(0xff673ab7), Color(0xff009688)],
+      [Color(0xffcddc39), Color(0xff03a9f4)],
+      [Color(0xff3f51b5), Color(0xff00bcd4)],
+      [Color(0xffe91e63), Color(0xff03a9f4)],
+      [Color(0xff2196f3), Color(0xff4caf50)],
+    ];
+    Random random = Random();
+    return BoxDecoration(
+      gradient: LinearGradient(
+        colors: list[random.nextInt(list.length)],
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
+      ),
+    );
   }
 
   static Widget setIconForMain(dynamic description) {

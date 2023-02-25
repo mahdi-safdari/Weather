@@ -49,49 +49,49 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
             child: Card(
               color: Colors.transparent,
               elevation: 0,
-              child: SizedBox(
-                width: 40,
-                height: 50,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      DateConverter.changeDtToDateTime(widget.list.dt),
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black87,
-                        fontFamily: 'comic',
-                      ),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    DateConverter.changeDtToDateTime(widget.list.dt),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black87,
+                      fontFamily: 'comic',
                     ),
-                    Text(
-                      DateConverter.changeDtToDateTimeHour(
-                          widget.list.dt, widget.city.timezone),
-                      style: TextStyle(
-                        fontSize: 8,
-                        color: Colors.grey,
-                        fontFamily: 'eras',
-                      ),
+                  ),
+                  Text(
+                    DateConverter.changeDtToDateTimeHour(
+                        widget.list.dt, widget.city.timezone),
+                    style: TextStyle(
+                      fontSize: 8,
+                      color: Colors.grey,
+                      fontFamily: 'eras',
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: SizedBox(
+                      width: 40,
+                      height: 40,
                       child: AppBackground.setIconForMain(
                         widget.list.weather![0].description,
                       ),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Text(
-                          "${widget.list.main!.temp!.round()}\u00B0",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontFamily: 'eras',
-                          ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        "${widget.list.main!.temp!.round()}\u00B0",
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontFamily: 'eras',
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
