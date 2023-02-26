@@ -4,6 +4,7 @@ import 'package:clean_block_floor_lint_dio/features/feature_bookmark/domain/enti
 import 'package:clean_block_floor_lint_dio/features/feature_bookmark/presentation/bloc/bookmark_bloc.dart';
 import 'package:clean_block_floor_lint_dio/features/feature_bookmark/presentation/bloc/get_all_city_status.dart';
 import 'package:clean_block_floor_lint_dio/features/feature_weather/presentation/bloc/home_bloc.dart';
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,6 +40,7 @@ class BookMarkScreen extends StatelessWidget {
           return SafeArea(
               child: Column(
             children: <Widget>[
+              const SizedBox(height: 10),
               const Text(
                 'Watch List',
                 style: TextStyle(
@@ -58,93 +60,99 @@ class BookMarkScreen extends StatelessWidget {
                           ),
                         ),
                       )
-                    : ListView.builder(
-                        itemCount: cities.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          City city = cities[index];
-                          return GestureDetector(
-                            onTap: () {
-                              //! cast for getting bookmark city data
-                              BlocProvider.of<HomeBloc>(context)
-                                  .add(LoadCwEvent(city.name));
-                              pageController.animateToPage(
-                                0,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: ClipRect(
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                                  child: Container(
-                                    width: width,
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20)),
-                                        color: Colors.grey.withOpacity(0.1)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Row(
-                                            children: <Widget>[
-                                              Container(
+                    : DelayedWidget(
+                        delayDuration: const Duration(milliseconds: 300),
+                        animationDuration: const Duration(seconds: 1),
+                        animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
+                        child: ListView.builder(
+                          itemCount: cities.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            City city = cities[index];
+                            return GestureDetector(
+                              onTap: () {
+                                //! cast for getting bookmark city data
+                                BlocProvider.of<HomeBloc>(context)
+                                    .add(LoadCwEvent(city.name));
+                                pageController.animateToPage(
+                                  0,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: ClipRect(
+                                  child: BackdropFilter(
+                                    filter:
+                                        ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                    child: Container(
+                                      width: width,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(20)),
+                                          color: Colors.grey.withOpacity(0.1)),
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Container(
+                                                  width: 30,
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/images/placeholder.png'),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 5),
+                                                Text(
+                                                  city.name,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontFamily: 'eras',
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                BlocProvider.of<BookmarkBloc>(
+                                                        context)
+                                                    .add(DeleteCityEvent(
+                                                        city.name));
+                                                BlocProvider.of<BookmarkBloc>(
+                                                        context)
+                                                    .add(GetAllCityEvent());
+                                              },
+                                              child: Container(
                                                 width: 30,
                                                 height: 30,
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
                                                     image: AssetImage(
-                                                        'assets/images/placeholder.png'),
+                                                        'assets/images/trash.png'),
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                city.name,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontFamily: 'eras',
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              BlocProvider.of<BookmarkBloc>(
-                                                      context)
-                                                  .add(DeleteCityEvent(
-                                                      city.name));
-                                              BlocProvider.of<BookmarkBloc>(
-                                                      context)
-                                                  .add(GetAllCityEvent());
-                                            },
-                                            child: Container(
-                                              width: 30,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/trash.png'),
-                                                ),
-                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
               ),
             ],
