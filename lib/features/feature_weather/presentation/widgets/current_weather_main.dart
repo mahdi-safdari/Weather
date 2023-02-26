@@ -19,7 +19,8 @@ class CurrentWeatherMain extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 1500),
       animation: DelayedAnimations.SLIDE_FROM_TOP,
       child: Shimmer(
-        interval: Duration(milliseconds: 600),
+        colorOpacity: 0.2,
+        interval: Duration(milliseconds: 2000),
         child: Column(
           children: <Widget>[
             //! city name
