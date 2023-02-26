@@ -49,6 +49,7 @@ dependencies:
   sqflite: ^2.2.4+1
   flutter_svg: ^2.0.1
   delayed_widget: ^1.1.2
+  shimmer_animation: ^2.1.0+1
   # rive: ^0.10.2
 
 dev_dependencies:

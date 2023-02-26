@@ -1,6 +1,7 @@
 import 'package:clean_block_floor_lint_dio/core/utils/date_converter.dart';
 import 'package:clean_block_floor_lint_dio/core/widgets/app_background.dart';
 import 'package:clean_block_floor_lint_dio/features/feature_weather/data/models/forecast_days_model.dart';
+import 'package:delayed_widget/delayed_widget.dart';
 import 'package:flutter/material.dart';
 
 class DaysWeatherView extends StatefulWidget {
@@ -23,9 +24,9 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
 
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
     );
-    animation = Tween(begin: -1.0, end: 0.0).animate(
+    animation = Tween(begin: -5.0, end: 0.0).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(0.5, 1, curve: Curves.decelerate),
