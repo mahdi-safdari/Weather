@@ -74,8 +74,8 @@ class _DaysWeatherViewState extends State<DaysWeatherView>
                     child: SizedBox(
                       width: 40,
                       height: 40,
-                      child: AppBackground.setIconForMain(
-                        widget.list.weather![0].description,
+                      child: AppBackground.setAnimateIcons(
+                        widget.list.weather![0].description!,
                       ),
                     ),
                   ),

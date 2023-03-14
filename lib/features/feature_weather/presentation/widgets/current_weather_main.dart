@@ -55,7 +55,7 @@ class CurrentWeatherMain extends StatelessWidget {
               child: SizedBox(
                 width: 100,
                 height: 100,
-                child: AppBackground.setIconForMain(
+                child: AppBackground.setAnimateIcons(
                   currentCityEntity.weather![0].description!,
                 ),
               ),

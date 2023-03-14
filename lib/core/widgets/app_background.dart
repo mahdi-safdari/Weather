@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 class AppBackground {
   static AssetImage getBackGroundImage() {
@@ -76,6 +77,88 @@ class AppBackground {
       return const Image(image: AssetImage('assets/images/snow.png'));
     } else {
       return const Image(image: AssetImage('assets/images/wind1.png'));
+    }
+  }
+
+  static Widget setAnimateIcons(String description) {
+    final DateTime now = DateTime.now();
+    final String formattedDate = DateFormat('kk').format(now);
+    //# Night
+    if (6 > int.parse(formattedDate)) {
+      if (description == "clear sky") {
+        return Lottie.asset('assets/json/clear-night.json');
+      } else if (description == "few clouds") {
+        return Lottie.asset('assets/json/few-cloudy-night.json');
+      } else if (description == "scattered clouds") {
+        return Lottie.asset('assets/json/few-cloudy-night.json');
+      } else if (description == "broken clouds") {
+        return Lottie.asset('assets/json/cloudynight.json');
+      } else if (description == "overcast clouds") {
+        return Lottie.asset('assets/json/cloudy.json');
+      } else if (description.contains("thunderstorm")) {
+        return Lottie.asset('assets/json/storm.json');
+      } else if (description.contains("drizzle")) {
+        return Lottie.asset('assets/json/rainynight.json');
+      } else if (description.contains("rain")) {
+        return Lottie.asset('assets/json/rainy.json');
+      } else if (description.contains("snow")) {
+        return Lottie.asset('assets/json/snow.json');
+      } else if (description.contains("sleet")) {
+        return Lottie.asset('assets/json/snownight.json');
+      } else {
+        return Lottie.asset('assets/json/windy.json');
+      }
+    }
+    //# Day
+    else if (18 > int.parse(formattedDate)) {
+      if (description == "clear sky") {
+        return Lottie.asset('assets/json/sunny.json');
+      } else if (description == "few clouds") {
+        return Lottie.asset('assets/json/few-cloudy.json');
+      } else if (description == "scattered clouds") {
+        return Lottie.asset('assets/json/few-cloudy.json');
+      } else if (description == "broken clouds") {
+        return Lottie.asset('assets/json/cloudyDay.json', fit: BoxFit.contain);
+      } else if (description == "overcast clouds") {
+        return Lottie.asset('assets/json/cloudy.json');
+      } else if (description.contains("thunderstorm")) {
+        return Lottie.asset('assets/json/storm.json');
+      } else if (description.contains("drizzle")) {
+        return Lottie.asset('assets/json/rain-sunny.json');
+      } else if (description.contains("rain")) {
+        return Lottie.asset('assets/json/rainy.json', fit: BoxFit.fill);
+      } else if (description.contains("snow")) {
+        return Lottie.asset('assets/json/snow.json');
+      } else if (description.contains("sleet")) {
+        return Lottie.asset('assets/json/snow-sunny.json');
+      } else {
+        return Lottie.asset('assets/json/windy.json');
+      }
+      //# Night
+    } else {
+      if (description == "clear sky") {
+        return Lottie.asset('assets/json/clear-night.json');
+      } else if (description == "few clouds") {
+        return Lottie.asset('assets/json/few-cloudy-night.json');
+      } else if (description == "scattered clouds") {
+        return Lottie.asset('assets/json/few-cloudy-night.json');
+      } else if (description == "broken clouds") {
+        return Lottie.asset('assets/json/cloudynight.json');
+      } else if (description == "overcast clouds") {
+        return Lottie.asset('assets/json/cloudy.json');
+      } else if (description.contains("thunderstorm")) {
+        return Lottie.asset('assets/json/storm.json');
+      } else if (description.contains("drizzle")) {
+        return Lottie.asset('assets/json/rainynight.json');
+      } else if (description.contains("rain")) {
+        return Lottie.asset('assets/json/rainy.json');
+      } else if (description.contains("snow")) {
+        return Lottie.asset('assets/json/snow.json');
+      } else if (description.contains("sleet")) {
+        return Lottie.asset('assets/json/snownight.json');
+      } else {
+        return Lottie.asset('assets/json/windy.json');
+      }
     }
   }
 }

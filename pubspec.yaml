@@ -50,6 +50,7 @@ dependencies:
   flutter_svg: ^2.0.1
   delayed_widget: ^1.1.2
   shimmer_animation: ^2.1.0+1
+  lottie: ^2.2.0
   # rive: ^0.10.2
 
 dev_dependencies:

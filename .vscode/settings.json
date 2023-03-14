@@ -1,4 +1,9 @@
 {
     "commentTranslate.multiLineMerge": false,
-    "commentTranslate.source": "Google"
+    "commentTranslate.source": "Google",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#571426",
+        "titleBar.activeBackground": "#7A1C35",
+        "titleBar.activeForeground": "#FEFBFC"
+    }
 }
