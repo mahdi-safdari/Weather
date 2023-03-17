@@ -17,7 +17,11 @@ class MainWrapper extends StatelessWidget {
       body: Container(
         height: height,
         decoration: AppBackground.decorationGradient(),
-        child: PageView(controller: pageController, children: pageViewWidget),
+        child: PageView(
+          controller: pageController,
+          children: pageViewWidget,
+          physics: BouncingScrollPhysics(),
+        ),
       ),
     );
   }
