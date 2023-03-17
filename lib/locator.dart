@@ -19,23 +19,18 @@ GetIt locator = GetIt.instance;
 setup() async {
   //! API provider
   locator.registerSingleton<ApiProvider>(ApiProvider());
-  final database =
-      await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  final database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
   locator.registerSingleton<AppDatabase>(database);
 
   //! Repositories
-  locator
-      .registerSingleton<WeatherRepository>(WeatherRepositoryImpl(locator()));
-  locator
-      .registerSingleton<CityRepository>(CityRepositoryImpl(database.cityDao));
+  locator.registerSingleton<WeatherRepository>(WeatherRepositoryImpl(locator()));
+  locator.registerSingleton<CityRepository>(CityRepositoryImpl(database.cityDao));
 
   //! current weather use case
-  locator.registerSingleton<GetCurrentWeatherUseCase>(
-      GetCurrentWeatherUseCase(locator()));
+  locator.registerSingleton<GetCurrentWeatherUseCase>(GetCurrentWeatherUseCase(locator()));
 
   //! forecast weather use case
-  locator.registerSingleton<GetForecastWeatherUseCase>(
-      GetForecastWeatherUseCase(locator()));
+  locator.registerSingleton<GetForecastWeatherUseCase>(GetForecastWeatherUseCase(locator()));
   locator.registerSingleton<GetCityUseCase>(GetCityUseCase(locator()));
   locator.registerSingleton<SaveCityUseCase>(SaveCityUseCase(locator()));
   locator.registerSingleton<GetAllCityUseCase>(GetAllCityUseCase(locator()));
@@ -43,6 +38,5 @@ setup() async {
 
   //! Bloc
   locator.registerSingleton<HomeBloc>(HomeBloc(locator(), locator()));
-  locator.registerSingleton<BookmarkBloc>(
-      BookmarkBloc(locator(), locator(), locator(), locator()));
+  locator.registerSingleton<BookmarkBloc>(BookmarkBloc(locator(), locator(), locator(), locator()));
 }

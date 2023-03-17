@@ -35,8 +35,7 @@ class BookMarkIcon extends StatelessWidget {
         /// show completed for CityStatus
         if (state.getCityStatus is GetCityCompleted) {
           /// casting for Getting city
-          final GetCityCompleted getCityCompleted =
-              state.getCityStatus as GetCityCompleted;
+          final GetCityCompleted getCityCompleted = state.getCityStatus as GetCityCompleted;
           final City? city = getCityCompleted.city;
 
           return BlocConsumer<BookmarkBloc, BookmarkState>(
@@ -58,8 +57,7 @@ class BookMarkIcon extends StatelessWidget {
               /// show Error as SnackBar
               if (cityState.saveCityStatus is SaveCityError) {
                 /// cast for getting Error
-                final SaveCityError saveCityError =
-                    cityState.saveCityStatus as SaveCityError;
+                final SaveCityError saveCityError = cityState.saveCityStatus as SaveCityError;
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -72,13 +70,11 @@ class BookMarkIcon extends StatelessWidget {
               /// show Success SnackBar
               if (cityState.saveCityStatus is SaveCityCompleted) {
                 /// cast for getting Data
-                final SaveCityCompleted saveCityCompleted =
-                    cityState.saveCityStatus as SaveCityCompleted;
+                final SaveCityCompleted saveCityCompleted = cityState.saveCityStatus as SaveCityCompleted;
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(
-                        "${saveCityCompleted.city.name} Added to Bookmark"),
+                    content: Text("${saveCityCompleted.city.name} Added to Bookmark"),
                     behavior: SnackBarBehavior.floating, // Add this line
                   ),
                 );
@@ -90,8 +86,7 @@ class BookMarkIcon extends StatelessWidget {
                 return IconButton(
                   onPressed: () {
                     /// call event for save Current City in Database
-                    BlocProvider.of<BookmarkBloc>(context)
-                        .add(SaveCwEvent(name));
+                    BlocProvider.of<BookmarkBloc>(context).add(SaveCwEvent(name));
                   },
                   icon: Icon(
                     city == null ? Icons.star_border : Icons.star,

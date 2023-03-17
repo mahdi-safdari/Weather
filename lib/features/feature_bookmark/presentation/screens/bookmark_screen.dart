@@ -35,8 +35,7 @@ class BookMarkScreen extends StatelessWidget {
         //! show loaded for allCityStatus
         if (state.getAllCityStatus is GetAllCityCompleted) {
           //! casting for getting sities
-          GetAllCityCompleted getAllCityCompleted =
-              state.getAllCityStatus as GetAllCityCompleted;
+          GetAllCityCompleted getAllCityCompleted = state.getAllCityStatus as GetAllCityCompleted;
           List<City> cities = getAllCityCompleted.cities;
           return SafeArea(
               child: Column(
@@ -44,8 +43,7 @@ class BookMarkScreen extends StatelessWidget {
               const SizedBox(height: 10),
               const Text(
                 'Watch List',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 25, fontFamily: 'eras'),
+                style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'eras'),
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -66,14 +64,14 @@ class BookMarkScreen extends StatelessWidget {
                         animationDuration: const Duration(seconds: 1),
                         animation: DelayedAnimations.SLIDE_FROM_BOTTOM,
                         child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
                           itemCount: cities.length,
                           itemBuilder: (BuildContext context, int index) {
                             City city = cities[index];
                             return GestureDetector(
                               onTap: () {
                                 //! cast for getting bookmark city data
-                                BlocProvider.of<HomeBloc>(context)
-                                    .add(LoadCwEvent(city.name));
+                                BlocProvider.of<HomeBloc>(context).add(LoadCwEvent(city.name));
                                 pageController.animateToPage(
                                   0,
                                   duration: const Duration(milliseconds: 300),
@@ -84,21 +82,15 @@ class BookMarkScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(8),
                                 child: ClipRect(
                                   child: BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                                     child: Container(
                                       width: width,
                                       height: 60,
-                                      decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(20)),
-                                          color: Colors.grey.withOpacity(0.1)),
+                                      decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(20)), color: Colors.grey.withOpacity(0.1)),
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 20),
+                                        padding: const EdgeInsets.only(left: 20),
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
                                             Row(
                                               children: <Widget>[
@@ -107,8 +99,7 @@ class BookMarkScreen extends StatelessWidget {
                                                   height: 30,
                                                   decoration: BoxDecoration(
                                                     image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/placeholder.png'),
+                                                      image: AssetImage('assets/images/placeholder.png'),
                                                     ),
                                                   ),
                                                 ),
@@ -125,21 +116,15 @@ class BookMarkScreen extends StatelessWidget {
                                             ),
                                             TextButton(
                                               onPressed: () {
-                                                BlocProvider.of<BookmarkBloc>(
-                                                        context)
-                                                    .add(DeleteCityEvent(
-                                                        city.name));
-                                                BlocProvider.of<BookmarkBloc>(
-                                                        context)
-                                                    .add(GetAllCityEvent());
+                                                BlocProvider.of<BookmarkBloc>(context).add(DeleteCityEvent(city.name));
+                                                BlocProvider.of<BookmarkBloc>(context).add(GetAllCityEvent());
                                               },
                                               child: Container(
                                                 width: 30,
                                                 height: 30,
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/images/trash.png'),
+                                                    image: AssetImage('assets/images/trash.png'),
                                                   ),
                                                 ),
                                               ),
@@ -162,8 +147,7 @@ class BookMarkScreen extends StatelessWidget {
         //! show Error for allCityStatus
         if (state.getAllCityStatus is GetAllCityError) {
           //! casting for getting error
-          GetAllCityError getAllCityError =
-              state.getAllCityStatus as GetAllCityError;
+          GetAllCityError getAllCityError = state.getAllCityStatus as GetAllCityError;
           return Center(child: Text(getAllCityError.message!));
         }
         //! show default value

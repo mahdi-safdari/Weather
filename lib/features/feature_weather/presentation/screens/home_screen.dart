@@ -21,13 +21,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with AutomaticKeepAliveClientMixin {
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
   String cityName = "Tehran";
   PageController pageController = PageController();
   TextEditingController textEditingController = TextEditingController();
-  GetSuggestionCityUseCase getSuggestionCityUseCase =
-      GetSuggestionCityUseCase(locator());
+  GetSuggestionCityUseCase getSuggestionCityUseCase = GetSuggestionCityUseCase(locator());
   @override
   void initState() {
     super.initState();
@@ -45,10 +43,7 @@ class _HomeScreenState extends State<HomeScreen>
         children: <Widget>[
           SizedBox(height: height * 0.02),
           //! Search box
-          SearchBox(
-              width: width,
-              textEditingController: textEditingController,
-              getSuggestionCityUseCase: getSuggestionCityUseCase),
+          SearchBox(width: width, textEditingController: textEditingController, getSuggestionCityUseCase: getSuggestionCityUseCase),
 
           //! main ui
           BlocBuilder<HomeBloc, HomeState>(
@@ -71,32 +66,28 @@ class _HomeScreenState extends State<HomeScreen>
               if (state.cwStatus is CwCompleted) {
                 //! Cast
                 final CwCompleted cwCompleted = state.cwStatus as CwCompleted;
-                final CurrentCityEntity currentCityEntity =
-                    cwCompleted.currentCityEntity;
+                final CurrentCityEntity currentCityEntity = cwCompleted.currentCityEntity;
                 //! Create params for api call
                 final ForecastParams forecastParams = ForecastParams(
                   currentCityEntity.coord!.lat!,
                   currentCityEntity.coord!.lon!,
                 );
                 //! Start load forecast weather event
-                BlocProvider.of<HomeBloc>(context)
-                    .add(LoadFwEvent(forecastParams));
+                BlocProvider.of<HomeBloc>(context).add(LoadFwEvent(forecastParams));
 
                 //! change Times to Hour --5:55 AM/PM----
-                final sunrise = DateConverter.changeDtToDateTimeHour(
-                    currentCityEntity.sys!.sunrise, currentCityEntity.timezone);
-                final sunset = DateConverter.changeDtToDateTimeHour(
-                    currentCityEntity.sys!.sunset, currentCityEntity.timezone);
+                final sunrise = DateConverter.changeDtToDateTimeHour(currentCityEntity.sys!.sunrise, currentCityEntity.timezone);
+                final sunset = DateConverter.changeDtToDateTimeHour(currentCityEntity.sys!.sunset, currentCityEntity.timezone);
                 return Expanded(
                   child: ListView(
+                    physics: BouncingScrollPhysics(),
                     children: <Widget>[
                       Container(
                         width: 100,
                         height: 380,
 
                         //! current weather main
-                        child: CurrentWeatherMain(
-                            currentCityEntity: currentCityEntity),
+                        child: CurrentWeatherMain(currentCityEntity: currentCityEntity),
                       ),
 
                       //! forcast weather 5 day
@@ -107,12 +98,7 @@ class _HomeScreenState extends State<HomeScreen>
 
                       //! List Viwe other current weather data
 
-                      OtherCurrentData(
-                          height: height,
-                          width: width,
-                          currentCityEntity: currentCityEntity,
-                          sunrise: sunrise,
-                          sunset: sunset),
+                      OtherCurrentData(height: height, width: width, currentCityEntity: currentCityEntity, sunrise: sunrise, sunset: sunset),
                       const SizedBox(height: 30),
                     ],
                   ),

@@ -29,14 +29,7 @@ class ForcastWeatherDays extends StatelessWidget {
         children: <Widget>[
           const Padding(
             padding: EdgeInsets.only(left: 15.0),
-            child: Text(
-              '5-day forcast',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-                fontFamily: 'comic',
-              ),
-            ),
+            child: Text('5-day forcast', style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: 'comic')),
           ),
           SizedBox(
             width: width,
@@ -53,22 +46,17 @@ class ForcastWeatherDays extends StatelessWidget {
                   //! show Completed State for Fw
                   if (state.fwStatus is FwCompleted) {
                     //! casting
-                    final FwCompleted fwCompleted =
-                        state.fwStatus as FwCompleted;
-                    final ForecastDaysEntity forecastDaysEntity =
-                        fwCompleted.forecastDaysEntity;
-                    final List<ListElement> mainDaily =
-                        forecastDaysEntity.list!;
+                    final FwCompleted fwCompleted = state.fwStatus as FwCompleted;
+                    final ForecastDaysEntity forecastDaysEntity = fwCompleted.forecastDaysEntity;
+                    final List<ListElement> mainDaily = forecastDaysEntity.list!;
 
                     return ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: 40,
                       itemBuilder: (BuildContext context, int index) {
-                        return DaysWeatherView(
-                          list: mainDaily[index],
-                          city: forecastDaysEntity.city!,
-                        );
+                        return DaysWeatherView(list: mainDaily[index], city: forecastDaysEntity.city!);
                       },
                     );
                   }
@@ -76,9 +64,7 @@ class ForcastWeatherDays extends StatelessWidget {
                   //! show Error State for Fw
                   if (state.fwStatus is FwError) {
                     final FwError fwError = state.fwStatus as FwError;
-                    return Center(
-                      child: Text(fwError.messeage),
-                    );
+                    return Center(child: Text(fwError.messeage));
                   }
 
                   //! show Default State for Fw

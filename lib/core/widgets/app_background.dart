@@ -46,11 +46,7 @@ class AppBackground {
     ];
     Random random = Random();
     return BoxDecoration(
-      gradient: LinearGradient(
-        colors: list[random.nextInt(list.length)],
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-      ),
+      gradient: LinearGradient(colors: list[random.nextInt(list.length)], begin: Alignment.topRight, end: Alignment.bottomLeft),
     );
   }
 

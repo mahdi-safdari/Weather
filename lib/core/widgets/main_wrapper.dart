@@ -9,10 +9,7 @@ class MainWrapper extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pageViewWidget = [
-      const HomeScreen(),
-      BookMarkScreen(pageController: pageController),
-    ];
+    final List<Widget> pageViewWidget = [const HomeScreen(), BookMarkScreen(pageController: pageController)];
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBody: true,
@@ -20,10 +17,7 @@ class MainWrapper extends StatelessWidget {
       body: Container(
         height: height,
         decoration: AppBackground.decorationGradient(),
-        child: PageView(
-          controller: pageController,
-          children: pageViewWidget,
-        ),
+        child: PageView(controller: pageController, children: pageViewWidget),
       ),
     );
   }

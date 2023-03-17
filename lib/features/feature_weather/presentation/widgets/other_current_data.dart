@@ -44,78 +44,35 @@ class OtherCurrentData extends StatelessWidget {
             height: height * 0.225,
             width: width,
             child: ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemCount: 6,
               padding: EdgeInsets.only(left: 10),
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                final visibility =
-                    (currentCityEntity.visibility! / 1000).toStringAsFixed(0);
-                final windSpeed =
-                    (currentCityEntity.wind!.speed! * 3.6).toStringAsFixed(2);
-                final List listName = [
-                  "Wind speed",
-                  "Humidity",
-                  "Sunrise",
-                  "Visibility",
-                  "Sunset",
-                  "Clouds",
-                ];
-                final List listImage = [
-                  'assets/images/wind1.png',
-                  'assets/images/drop.png',
-                  'assets/images/sunrise.png',
-                  'assets/images/visibility.png',
-                  'assets/images/sunrise.png',
-                  'assets/images/precipitation.png',
-                ];
-                final List listValue = [
-                  "$windSpeed km/h",
-                  "${currentCityEntity.main!.humidity!}%",
-                  sunrise,
-                  "$visibility km",
-                  sunset,
-                  "${currentCityEntity.clouds!.all}%",
-                ];
+                final visibility = (currentCityEntity.visibility! / 1000).toStringAsFixed(0);
+                final windSpeed = (currentCityEntity.wind!.speed! * 3.6).toStringAsFixed(2);
+                final List listName = ["Wind speed", "Humidity", "Sunrise", "Visibility", "Sunset", "Clouds"];
+                final List listImage = ['assets/images/wind1.png', 'assets/images/drop.png', 'assets/images/sunrise.png', 'assets/images/visibility.png', 'assets/images/sunrise.png', 'assets/images/precipitation.png'];
+                final List listValue = ["$windSpeed km/h", "${currentCityEntity.main!.humidity!}%", sunrise, "$visibility km", sunset, "${currentCityEntity.clouds!.all}%"];
                 return SizedBox(
                   height: 130,
                   width: 110,
                   child: Card(
                     color: Colors.grey.withOpacity(0.22),
                     elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(7))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7))),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            listName[index],
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                              fontFamily: 'comic',
-                            ),
-                          ),
+                          Text(listName[index], style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: 'comic')),
                           Container(
                             height: 40,
                             width: 40,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  listImage[index],
-                                ),
-                              ),
-                            ),
+                            decoration: BoxDecoration(image: DecorationImage(image: AssetImage(listImage[index]))),
                           ),
-                          Text(
-                            listValue[index],
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black87,
-                              fontFamily: 'comic',
-                            ),
-                          ),
+                          Text(listValue[index], style: TextStyle(fontSize: 12, color: Colors.black87, fontFamily: 'comic')),
                         ],
                       ),
                     ),

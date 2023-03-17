@@ -12,16 +12,13 @@ class BottomNav extends StatelessWidget {
         Card(
           margin: EdgeInsets.fromLTRB(80, 0, 80, 12),
           elevation: 1,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               IconButton(
                 onPressed: () {
-                  controller.animateToPage(0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut);
+                  controller.animateToPage(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                 },
                 icon: SizedBox(
                   width: 25,
@@ -31,9 +28,7 @@ class BottomNav extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  controller.animateToPage(1,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut);
+                  controller.animateToPage(1, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
                 },
                 icon: SizedBox(
                   width: 25,

@@ -10,14 +10,12 @@ part of 'database.dart';
 class $FloorAppDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder databaseBuilder(String name) =>
-      _$AppDatabaseBuilder(name);
+  static _$AppDatabaseBuilder databaseBuilder(String name) => _$AppDatabaseBuilder(name);
 
   /// Creates a database builder for an in memory database.
   /// Information stored in an in memory database disappears when the process is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder inMemoryDatabaseBuilder() =>
-      _$AppDatabaseBuilder(null);
+  static _$AppDatabaseBuilder inMemoryDatabaseBuilder() => _$AppDatabaseBuilder(null);
 }
 
 class _$AppDatabaseBuilder {
@@ -43,9 +41,7 @@ class _$AppDatabaseBuilder {
 
   /// Creates the database and initializes it.
   Future<AppDatabase> build() async {
-    final path = name != null
-        ? await sqfliteDatabaseFactory.getDatabasePath(name!)
-        : ':memory:';
+    final path = name != null ? await sqfliteDatabaseFactory.getDatabasePath(name!) : ':memory:';
     final database = _$AppDatabase();
     database.database = await database.open(
       path,
@@ -78,14 +74,12 @@ class _$AppDatabase extends AppDatabase {
         await callback?.onOpen?.call(database);
       },
       onUpgrade: (database, startVersion, endVersion) async {
-        await MigrationAdapter.runMigrations(
-            database, startVersion, endVersion, migrations);
+        await MigrationAdapter.runMigrations(database, startVersion, endVersion, migrations);
 
         await callback?.onUpgrade?.call(database, startVersion, endVersion);
       },
       onCreate: (database, version) async {
-        await database.execute(
-            'CREATE TABLE IF NOT EXISTS `City` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL)');
+        await database.execute('CREATE TABLE IF NOT EXISTS `City` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -104,8 +98,7 @@ class _$CityDao extends CityDao {
     this.database,
     this.changeListener,
   )   : _queryAdapter = QueryAdapter(database),
-        _cityInsertionAdapter = InsertionAdapter(database, 'City',
-            (City item) => <String, Object?>{'id': item.id, 'name': item.name});
+        _cityInsertionAdapter = InsertionAdapter(database, 'City', (City item) => <String, Object?>{'id': item.id, 'name': item.name});
 
   final sqflite.DatabaseExecutor database;
 
@@ -117,22 +110,17 @@ class _$CityDao extends CityDao {
 
   @override
   Future<List<City>> getAllCity() async {
-    return _queryAdapter.queryList('SELECT * FROM City',
-        mapper: (Map<String, Object?> row) =>
-            City(name: row['name'] as String));
+    return _queryAdapter.queryList('SELECT * FROM City', mapper: (Map<String, Object?> row) => City(name: row['name'] as String));
   }
 
   @override
   Future<City?> findCityByName(String name) async {
-    return _queryAdapter.query('SELECT * FROM City WHERE name = ?1',
-        mapper: (Map<String, Object?> row) => City(name: row['name'] as String),
-        arguments: [name]);
+    return _queryAdapter.query('SELECT * FROM City WHERE name = ?1', mapper: (Map<String, Object?> row) => City(name: row['name'] as String), arguments: [name]);
   }
 
   @override
   Future<void> deleteCityByName(String name) async {
-    await _queryAdapter
-        .queryNoReturn('DELETE FROM City WHERE name = ?1', arguments: [name]);
+    await _queryAdapter.queryNoReturn('DELETE FROM City WHERE name = ?1', arguments: [name]);
   }
 
   @override

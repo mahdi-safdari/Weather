@@ -58,13 +58,11 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
 
       //! emit complete state
       if (dataState is DataSuccess) {
-        emit(state.copyWith(
-            newSaveCityStatus: SaveCityCompleted(dataState.data)));
+        emit(state.copyWith(newSaveCityStatus: SaveCityCompleted(dataState.data)));
       }
       //! emit error state
       if (dataState is DataFailed) {
-        emit(
-            state.copyWith(newSaveCityStatus: SaveCityError(dataState.error!)));
+        emit(state.copyWith(newSaveCityStatus: SaveCityError(dataState.error!)));
       }
     });
     on<SaveCityInitialEvent>((event, emit) async {
@@ -80,14 +78,12 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
 
       //! emit Complete state
       if (dataState is DataSuccess) {
-        emit(state.copyWith(
-            newDeleteCityStatus: DeleteCityCompleted(dataState.data)));
+        emit(state.copyWith(newDeleteCityStatus: DeleteCityCompleted(dataState.data)));
       }
 
       //! emit Error state
       if (dataState is DataFailed) {
-        emit(state.copyWith(
-            newDeleteCityStatus: DeleteCityError(dataState.error!)));
+        emit(state.copyWith(newDeleteCityStatus: DeleteCityError(dataState.error!)));
       }
     });
 
@@ -100,14 +96,12 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
 
       //! emit Complete state
       if (dataState is DataSuccess) {
-        emit(state.copyWith(
-            newGetAllCityStatus: GetAllCityCompleted(dataState.data)));
+        emit(state.copyWith(newGetAllCityStatus: GetAllCityCompleted(dataState.data)));
       }
 
       //! emit Error state
       if (dataState is DataFailed) {
-        emit(state.copyWith(
-            newGetAllCityStatus: GetAllCityError(dataState.error!)));
+        emit(state.copyWith(newGetAllCityStatus: GetAllCityError(dataState.error!)));
       }
     });
   }
